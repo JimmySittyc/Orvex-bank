@@ -73,7 +73,7 @@
         <!-- ========================================== -->
         <!-- SCREEN 2: MAIN DASHBOARD (Hidden by default)-->
         <!-- ========================================== -->
-        <div id="screen-dashboard" class="hidden flex-1 flex flex-col justify-between overflow-hidden z-10 bg-neutral-950">
+        <div id="screen-dashboard" class="hidden flex-1 flex flex-col justify-between overflow-hidden z-10 z-10 bg-neutral-950">
             
             <!-- Top Nav -->
             <div class="p-6 flex justify-between items-center bg-neutral-950 border-b border-neutral-900">
@@ -99,20 +99,20 @@
                     <div class="flex justify-between items-center">
                         <span class="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Liquidity Assets</span>
                         <span class="text-[10px] text-amber-400/80 flex items-center gap-1 font-mono">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span> FX Clearing Live
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span> Settlement Live
                         </span>
                     </div>
 
-                    <!-- Card USD -->
+                    <!-- Card USDT -->
                     <div class="ios-blur rounded-[28px] p-6 relative overflow-hidden shadow-xl gold-border-glow">
                         <div class="flex justify-between items-start">
                             <div>
-                                <p class="text-xs text-neutral-400 font-medium">US Dollar Balance</p>
-                                <p id="balance-usd" class="text-3xl font-bold tracking-tight mt-1 text-white">$4,850.00</p>
+                                <p class="text-xs text-neutral-400 font-medium">Tether Stablecoin Balance</p>
+                                <p id="balance-usdt" class="text-3xl font-bold tracking-tight mt-1 text-white">4,850.00 <span class="text-xl font-medium text-amber-400">USDT</span></p>
                             </div>
-                            <span class="text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-md bg-amber-400 text-black uppercase">USD</span>
+                            <span class="text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-md bg-amber-400 text-black uppercase">USDT</span>
                         </div>
-                        <p class="text-[9px] text-amber-500/40 mt-6 tracking-widest font-mono">ORVX-8821-USD // CORESYNC</p>
+                        <p class="text-[9px] text-amber-500/40 mt-6 tracking-widest font-mono">ORVX-8821-USDT // TRC20-ERC20</p>
                     </div>
 
                     <!-- Card BOB -->
@@ -166,7 +166,6 @@
                     <button onclick="closeModal('modal-qr')" class="text-neutral-500 hover:text-amber-400 text-sm">Dismiss</button>
                 </div>
                 
-                <!-- Inverted QR Code Frame to blend perfectly into dark interface -->
                 <div class="w-44 h-44 bg-white p-3 rounded-2xl mx-auto flex items-center justify-center filter invert brightness-95">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=orvex-gold-metallic-rail" alt="QR" class="w-full h-full">
                 </div>
@@ -201,11 +200,11 @@
                         <input type="text" id="wire-routing" placeholder="e.g. Chase Bank, USA" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
                     </div>
                     <div>
-                        <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">IBAN / Transaction Address</label>
-                        <input type="text" id="wire-iban" placeholder="US1234567890" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
+                        <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">USDT Network Address / IBAN</label>
+                        <input type="text" id="wire-iban" placeholder="0x71C... or International Wire Account" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
                     </div>
                     <div>
-                        <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">Volume Allocation ($ USD)</label>
+                        <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">Volume Allocation (USDT)</label>
                         <input type="number" id="wire-amount" placeholder="0.00" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
                     </div>
                     <button onclick="executeMockGlobalWire()" class="w-full h-12 gold-gradient text-black font-semibold rounded-xl active:scale-95 transition text-sm mt-2">
@@ -221,12 +220,12 @@
     <!-- APPLICATION CONTROLLER LOGIC               -->
     <!-- ========================================== -->
     <script>
-        let currentBalanceUSD = 4850.00;
+        let currentBalanceUSDT = 4850.00;
         let currentBalanceBOB = 12400.00;
 
         const mockTransactions = [
             { id: 1, type: 'QR Received', amount: 'Bs. 350.00', date: 'Today, 9:14 AM', category: 'Vault Inflow', status: 'Settled', polarity: '+' },
-            { id: 2, type: 'Wire Transmitted', amount: '-$120.00', date: 'Yesterday, 3:45 PM', category: 'Cross-Border', status: 'Settled', polarity: '-' },
+            { id: 2, type: 'Wire Transmitted', amount: '-120.00 USDT', date: 'Yesterday, 3:45 PM', category: 'Cross-Border', status: 'Settled', polarity: '-' },
             { id: 3, type: 'QR Settled', amount: '-Bs. 45.00', date: 'May 20, 1:12 PM', category: 'Liquidity Point', status: 'Settled', polarity: '-' }
         ];
 
@@ -310,17 +309,17 @@
             if (!name || !routing || !iban || !amountValue || amountValue <= 0) {
                 return alert("Incomplete cryptographic routing fields.");
             }
-            if (amountValue > currentBalanceUSD) return alert("Liquidity cap breached in USD asset index.");
+            if (amountValue > currentBalanceUSDT) return alert("Liquidity cap breached in USDT asset index.");
 
-            console.log(`Orvex Ledger Event: Distributing cross-border wire framework. Recipient: ${name}. Volume: $${amountValue}.`);
+            console.log(`Orvex Ledger Event: Distributing cross-border USDT wire framework. Recipient: ${name}. Volume: ${amountValue} USDT.`);
 
-            currentBalanceUSD -= amountValue;
-            document.getElementById('balance-usd').innerText = `$${currentBalanceUSD.toFixed(2)}`;
+            currentBalanceUSDT -= amountValue;
+            document.getElementById('balance-usdt').innerHTML = `${currentBalanceUSDT.toFixed(2)} <span class="text-xl font-medium text-amber-400">USDT</span>`;
 
             mockTransactions.unshift({
                 id: Date.now(),
                 type: 'Global Wire Out',
-                amount: `-$${amountValue.toFixed(2)}`,
+                amount: `-${amountValue.toFixed(2)} USDT`,
                 date: 'Just Now',
                 category: `To ${name}`,
                 status: 'Clearing Pool',
