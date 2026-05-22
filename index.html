@@ -1,415 +1,336 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" class="h-full bg-slate-950 text-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Takenos Clone - Bolivia Prototype</title>
-    <!-- React and Babel via CDN for immediate running -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <title>Takenos Clone - iOS 26 Banking</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS for custom iOS 26 blurs and gradients -->
     <style>
-        :root {
-            --bg-main: #0A0E1A;
-            --bg-surface: #1E293B;
-            --bg-card: #1E40AF;
-            --text-primary: #FFFFFF;
-            --text-secondary: #94A3B8;
-            --text-muted: #64748B;
-            --color-primary: #2563EB;
-            --color-success: #10B981;
-            --color-danger: #EF4444;
+        .ios-blur {
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        .ios-gradient {
+            background: radial-gradient(circle at 50% -20%, #3b82f6 0%, #1d4ed8 40%, #020617 100%);
         }
-
-        body {
-            background-color: #030712;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: var(--text-primary);
-        }
-
-        /* Smartphone Frame Container for Web view */
-        .phone-wrapper {
-            width: 100%;
-            max-width: 412px;
-            height: 844px;
-            background-color: var(--bg-main);
-            border: 8px solid #27272a;
-            border-radius: 40px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .phone-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 24px;
-            padding-bottom: 90px;
-        }
-
-        /* Custom Scrollbar for Phone UI */
-        .phone-content::-webkit-scrollbar {
-            width: 4px;
-        }
-        .phone-content::-webkit-scrollbar-thumb {
-            background: var(--bg-surface);
-            border-radius: 10px;
-        }
-
-        /* Bottom Tab Navigation Bar */
-        .nav-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 75px;
-            background-color: var(--bg-surface);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #334155;
-            padding-bottom: 10px;
-            z-index: 10;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nav-item.active {
-            color: var(--color-primary);
-        }
-
-        .nav-icon {
-            font-size: 20px;
-            margin-bottom: 4px;
-        }
-
-        /* Utility Styles */
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-        .divider { height: 1px; background-color: #334155; margin: 16px 0; }
+        /* Hide scrollbars but retain functionality */
+        ::-webkit-scrollbar { display: none; }
+        * { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body>
+<body class="h-full ios-gradient font-sans antialiased flex justify-center items-center p-0 sm:p-4">
 
-    <div id="root"></div>
+    <!-- Container mimicking a sleek dynamic mobile viewport -->
+    <div id="app-container" class="w-full h-full sm:max-w-md sm:h-[850px] sm:rounded-[50px] sm:border-[8px] sm:border-slate-800 shadow-2xl relative overflow-hidden flex flex-col bg-slate-950/80">
+        
+        <!-- ========================================== -->
+        <!-- SCREEN 1: LOGIN (Visible by default)      -->
+        <!-- ========================================== -->
+        <div id="screen-login" class="flex-1 flex flex-col justify-between p-8 z-10">
+            <div class="text-center pt-16">
+                <div class="w-16 h-16 bg-blue-600 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4">
+                    <span class="text-2xl font-bold tracking-tighter">t</span>
+                </div>
+                <h1 class="text-3xl font-semibold tracking-tight">takenos</h1>
+                <p class="text-slate-400 text-sm mt-2">Global Wealth. Simply Managed.</p>
+            </div>
 
-    <script type="text/babel">
-        const GLOBAL_EXCHANGE_RATE = 11.00; 
+            <div class="space-y-4">
+                <div class="space-y-2">
+                    <input type="email" id="login-email" placeholder="Email" value="user@example.com" class="w-full h-14 px-5 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition text-base">
+                    <input type="password" id="login-password" placeholder="Password" value="password123" class="w-full h-14 px-5 rounded-2xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none transition text-base">
+                </div>
+                <button onclick="handleMockLogin()" class="w-full h-14 bg-white text-black font-medium rounded-2xl active:scale-[0.98] transition flex items-center justify-center text-base">
+                    Sign In
+                </button>
+            </div>
 
-        function App() {
-            const [currentScreen, setCurrentScreen] = React.useState('inicio');
-            const [usdcBalance, setUsdcBalance] = React.useState(1250.00);
-            const [showCardDetails, setShowCardDetails] = React.useState(false);
-            const [transactions, setTransactions] = React.useState([
-                { id: '1', title: 'Remittance from Remote Co.', type: 'credit', amount: 450.00 },
-                { id: '2', title: 'Netflix Subscription', type: 'debit', amount: 10.99 },
-                { id: '3', title: 'QR Payment: Supermercado Fidalga', type: 'debit', amount: 12.50 },
-            ]);
+            <div class="text-center text-xs text-slate-500 pb-4">
+                By continuing, you agree to the iOS 26 Terms of Banking.
+            </div>
+        </div>
 
-            // Real-time calculation helpers
-            const bobBalance = usdcBalance * GLOBAL_EXCHANGE_RATE;
-
-            return (
-                <div className="phone-wrapper">
-                    <div className="phone-content">
-                        {currentScreen === 'inicio' && (
-                            <Dashboard 
-                                bobBalance={bobBalance} 
-                                usdcBalance={usdcBalance}
-                                showCardDetails={showCardDetails}
-                                setShowCardDetails={setShowCardDetails}
-                                transactions={transactions}
-                                changeScreen={setCurrentScreen}
-                            />
-                        )}
-                        {currentScreen === 'depositar' && (
-                            <Deposit setUsdcBalance={setUsdcBalance} setTransactions={setTransactions} />
-                        )}
-                        {currentScreen === 'escanear' && (
-                            <ScanQR setUsdcBalance={setUsdcBalance} setTransactions={setTransactions} changeScreen={setCurrentScreen} />
-                        )}
+        <!-- ========================================== -->
+        <!-- SCREEN 2: MAIN DASHBOARD (Hidden by default)-->
+        <!-- ========================================== -->
+        <div id="screen-dashboard" class="hidden flex-1 flex flex-col justify-between overflow-hidden z-10">
+            
+            <!-- Top Nav -->
+            <div class="p-6 flex justify-between items-center bg-slate-950/40 backdrop-blur-md">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500 flex items-center justify-center font-bold text-sm">
+                        JD
                     </div>
-
-                    <div className="nav-bar">
-                        <button className={`nav-item ${currentScreen === 'inicio' ? 'active' : ''}`} onClick={() => setCurrentScreen('inicio')}>
-                            <span className="nav-icon">🏠</span>Inicio
-                        </button>
-                        <button className={`nav-item ${currentScreen === 'depositar' ? 'active' : ''}`} onClick={() => setCurrentScreen('depositar')}>
-                            <span className="nav-icon">📥</span>Depositar
-                        </button>
-                        <button className={`nav-item ${currentScreen === 'escanear' ? 'active' : ''}`} onClick={() => setCurrentScreen('escanear')}>
-                            <span className="nav-icon">📱</span>Escanear QR
-                        </button>
+                    <div>
+                        <p class="text-xs text-slate-400">Good morning,</p>
+                        <p class="text-sm font-medium">John Doe</p>
                     </div>
                 </div>
-            );
-        }
+                <button onclick="handleMockLogout()" class="px-3 py-1.5 rounded-full text-xs bg-white/10 hover:bg-white/20 transition">
+                    Log out
+                </button>
+            </div>
 
-        // ==========================================
-        // COMPONENTS: DASHBOARD
-        // ==========================================
-        function Dashboard({ bobBalance, usdcBalance, showCardDetails, setShowCardDetails, transactions, changeScreen }) {
-            return (
-                <div style={{animation: 'fadeIn 0.3s ease'}}>
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
-                        <h3 style={{fontSize: '18px', fontWeight: '600'}}>Hola, Alejandro 👋</h3>
-                        <div style={{background: 'var(--bg-surface)', padding: '10px', borderRadius: '50%', cursor: 'pointer'}}>🔔</div>
+            <!-- Dynamic Balance Carousel Content -->
+            <div class="flex-1 overflow-y-auto px-6 py-4 space-y-6">
+                
+                <!-- Balances Section -->
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-semibold tracking-wider text-slate-400 uppercase">My Accounts</span>
+                        <span class="text-xs text-blue-400">Live FX Active</span>
                     </div>
 
-                    <div style={{marginBottom: '28px'}}>
-                        <p style={{color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '4px'}}>Tu balance disponible</p>
-                        <h1 style={{fontSize: '36px', fontWeight: '700', letterSpacing: '-0.5px'}}>${usdcBalance.toFixed(2)} USDC</h1>
-                        <h4 style={{color: 'var(--color-success)', fontSize: '16px', fontWeight: '500', marginTop: '2px'}}>≈ {bobBalance.toLocaleString('es-BO')} BOB</h4>
-                    </div>
-
-                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '28px'}}>
-                        <button style={styles.actionBtn} onClick={() => changeScreen('depositar')}><span>➕</span><small style={styles.actionText}>Depósito</small></button>
-                        <button style={styles.actionBtn} onClick={() => alert("Módulo P2P en desarrollo")}><span>💸</span><small style={styles.actionText}>Enviar</small></button>
-                        <button style={styles.actionBtn} onClick={() => setShowCardDetails(!showCardDetails)}><span>💳</span><small style={styles.actionText}>Tarjeta</small></button>
-                        <button style={styles.actionBtn} onClick={() => changeScreen('escanear')}><span>📱</span><small style={styles.actionText}>Escanear</small></button>
-                    </div>
-
-                    <h3 style={{fontSize: '16px', marginBottom: '12px', fontWeight: '600'}}>Tu Tarjeta Digital Global</h3>
-                    <div style={styles.creditCard}>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                            <span style={{fontStyle: 'italic', fontWeight: '800', fontSize: '20px'}}>VISA</span>
-                            <span style={{fontSize: '11px', color: '#93C5FD'}}>Prepaid</span>
-                        </div>
-                        <div style={{fontSize: '18px', letterSpacing: '2px', margin: '14px 0'}}>
-                            {showCardDetails ? "4532 8192 0034 4832" : "••••  ••••  ••••  4832"}
-                        </div>
-                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', color: '#93C5FD'}}>
-                            <span>EXP: 12/29</span>
-                            <span style={{color: '#FFF', textDecoration: 'underline', cursor: 'pointer'}} onClick={() => setShowCardDetails(!showCardDetails)}>
-                                {showCardDetails ? "Ocultar" : "Ver Datos"}
-                            </span>
-                        </div>
-                    </div>
-
-                    <h3 style={{fontSize: '16px', marginBottom: '12px', fontWeight: '600'}}>Actividad Reciente</h3>
-                    {transactions.map(tx => (
-                        <div key={tx.id} style={styles.txRow}>
+                    <!-- Card USD -->
+                    <div class="ios-blur rounded-[28px] p-6 relative overflow-hidden shadow-xl">
+                        <div class="flex justify-between items-start">
                             <div>
-                                <p style={{fontSize: '14px', fontWeight: '500'}}>{tx.title}</p>
-                                <p style={{fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px'}}>{tx.type === 'credit' ? 'Ingreso Bancario' : 'Gasto Local'}</p>
+                                <p class="text-xs text-slate-400 font-medium">US Dollar Balance</p>
+                                <p id="balance-usd" class="text-3xl font-bold tracking-tight mt-1">$4,850.00</p>
                             </div>
-                            <span style={{fontWeight: '600', fontSize: '15px', color: tx.type === 'credit' ? 'var(--color-success)' : 'var(--color-danger)'}}>
-                                {tx.type === 'credit' ? '+' : '-'} ${tx.amount.toFixed(2)}
-                            </span>
+                            <span class="text-xs font-bold tracking-wider px-2.5 py-1 rounded-full bg-green-500/20 text-green-400">USD</span>
                         </div>
-                    ))}
-                </div>
-            );
-        }
-
-        // ==========================================
-        // COMPONENTS: DEPOSIT FLOW
-        // ==========================================
-        function Deposit({ setUsdcBalance, setTransactions }) {
-            const [tab, setTab] = React.useState('local');
-            const [amount, setAmount] = React.useState('');
-            const [showQR, setShowQR] = React.useState(false);
-
-            const calculatedUSDC = amount ? (parseFloat(amount) / GLOBAL_EXCHANGE_RATE).toFixed(2) : '0.00';
-
-            const handleSimulateDeposit = () => {
-                const addedUSDC = parseFloat(calculatedUSDC);
-                setUsdcBalance(prev => prev + addedUSDC);
-                setTransactions(prev => [
-                    { id: Date.now().toString(), title: 'Carga de Fondos QR', type: 'credit', amount: addedUSDC },
-                    ...prev
-                ]);
-                alert(`¡Éxito! Se han acreditado $${calculatedUSDC} USDC.`);
-                setAmount('');
-                setShowQR(false);
-            };
-
-            return (
-                <div style={{animation: 'fadeIn 0.3s ease'}}>
-                    <div style={styles.tabWrapper}>
-                        <button style={{...styles.tabBtn, ...(tab === 'local' ? styles.activeTabBtn : {})}} onClick={() => {setTab('local'); setShowQR(false);}}>QR Boliviano</button>
-                        <button style={{...styles.tabBtn, ...(tab === 'global' ? styles.activeTabBtn : {})}} onClick={() => setTab('global')}>Cuenta EE.UU.</button>
+                        <p class="text-[10px] text-slate-500 mt-6 tracking-widest">•••• •••• •••• 8821</p>
                     </div>
 
-                    {tab === 'local' ? (
-                        <div>
-                            <p style={styles.inputLabel}>¿Cuánto deseas abonar en BOB?</p>
-                            <div style={styles.inputBox}>
-                                <input style={styles.field} type="number" placeholder="0.00" value={amount} onChange={(e) => {setAmount(e.target.value); setShowQR(false);}} />
-                                <span style={{fontWeight: '700', color: 'var(--text-muted)'}}>BOB</span>
+                    <!-- Card BOB -->
+                    <div class="ios-blur rounded-[28px] p-6 relative overflow-hidden shadow-xl">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Bolivianos Balance</p>
+                                <p id="balance-bob" class="text-3xl font-bold tracking-tight mt-1">Bs. 12,400.00</p>
                             </div>
-                            <p style={{fontSize: '11px', color: 'var(--text-muted)', marginBottom: '20px'}}>Tasa paralela: 1 USDC = {GLOBAL_EXCHANGE_RATE} BOB</p>
-
-                            <div style={styles.conversionAlert}>
-                                <p style={{fontSize: '12px', color: 'var(--text-secondary)'}}>Recibirás en tu cuenta:</p>
-                                <h2 style={{color: 'var(--color-success)', marginTop: '4px'}}>${calculatedUSDC} USDC</h2>
-                            </div>
-
-                            {!showQR ? (
-                                <button className="btn-primary" disabled={!amount} onClick={() => setShowQR(true)}>Generar Código QR</button>
-                            ) : (
-                                <div style={{textAlign: 'center', marginTop: '10px'}}>
-                                    <div style={styles.qrSquare} onClick={handleSimulateDeposit}>
-                                        <div style={{fontSize: '12px', fontWeight: '800'}}>CÓDIGO QR SIMPLE</div>
-                                        <div style={{fontSize: '14px', color: 'var(--color-primary)', marginTop: '8px', fontWeight: 'bold'}}>{amount} BOB</div>
-                                        <div style={{fontSize: '9px', color: 'var(--text-muted)', marginTop: '15px'}}>[Hacer click para simular pago bancario]</div>
-                                    </div>
-                                    <p style={{fontSize: '12px', color: 'var(--text-secondary)', lineHeight: '18px'}}>Captura la imagen y procésala en tu aplicación de banca móvil preferida de Bolivia.</p>
-                                </div>
-                            )}
+                            <span class="text-xs font-bold tracking-wider px-2.5 py-1 rounded-full bg-blue-500/20 text-blue-400">BOB</span>
                         </div>
-                    ) : (
-                        <div>
-                            <p style={{fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '20px', marginBottom: '20px'}}>Usa estos datos para transferir de forma directa remesas e ingresos desde el exterior vía ACH o Wire.</p>
-                            <div style={styles.bankCardSheet}>
-                                <div style={styles.bankItem}><small>BANCO RECEPTOR</small><p>Evolve Bank & Trust</p></div>
-                                <div style={styles.bankItem}><small>BENEFICIARIO</small><p>Alejandro Mendoza</p></div>
-                                <div style={styles.bankItem}><small>NÚMERO DE RUTA (ACH/ABA)</small><p style={{color: 'var(--color-primary)', fontWeight:'600'}}>021000021 📋</p></div>
-                                <div style={styles.bankItem}><small>NÚMERO DE CUENTA</small><p style={{color: 'var(--color-primary)', fontWeight:'600'}}>123456789012 📋</p></div>
-                            </div>
-                        </div>
-                    )}
+                        <p class="text-[10px] text-slate-500 mt-6 tracking-widest">•••• •••• •••• 4119</p>
+                    </div>
                 </div>
-            );
+
+                <!-- Action Hub Quick Controls -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="openModal('modal-qr')" class="ios-blur rounded-2xl py-4 flex flex-col items-center justify-center gap-2 hover:bg-white/10 active:scale-95 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-blue-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.875 15.75a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5H21v1.5h-1.5V13.5ZM13.5 16.5H15V18h-1.5v-1.5ZM15 19.5h1.5V21H15v-1.5ZM13.5 13.5H15v1.5h-1.5V13.5ZM16.5 18H18v1.5h-1.5V18ZM18 15h1.5v1.5H18V15ZM19.5 18H21v1.5h-1.5V18ZM18 19.5h1.5V21H18v-1.5ZM16.5 13.5H18v1.5h-1.5V13.5Z" />
+                        </svg>
+                        <span class="text-xs font-medium">Bolivia QR Pay</span>
+                    </button>
+                    <button onclick="openModal('modal-wire')" class="ios-blur rounded-2xl py-4 flex flex-col items-center justify-center gap-2 hover:bg-white/10 active:scale-95 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-green-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-.738.09-1.455.257-2.147" />
+                        </svg>
+                        <span class="text-xs font-medium">Global Transfer</span>
+                    </button>
+                </div>
+
+                <!-- Transaction Ledger Feed -->
+                <div class="space-y-3">
+                    <span class="text-xs font-semibold tracking-wider text-slate-400 uppercase block">Recent Movements</span>
+                    <div id="ledger-container" class="space-y-2">
+                        <!-- Mock data will be injected dynamically below -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MODAL: BOLIVIAN QR PAYING                 -->
+        <!-- ========================================== -->
+        <div id="modal-qr" class="hidden absolute inset-0 bg-black/60 backdrop-blur-xl z-20 flex flex-col justify-end transition-transform duration-300">
+            <div class="bg-slate-900/90 border-t border-white/10 rounded-t-[32px] p-6 space-y-6 max-h-[90%] overflow-y-auto">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-semibold">Bolivian Simple QR Pay</h3>
+                    <button onclick="closeModal('modal-qr')" class="text-slate-400 hover:text-white">Close</button>
+                </div>
+                
+                <!-- Mock Scanner Display Box -->
+                <div class="w-48 h-48 bg-white p-3 rounded-2xl mx-auto flex items-center justify-center">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=takenos-mock-payment-rail" alt="Mock QR Code" class="w-full h-full">
+                </div>
+                <p class="text-xs text-slate-400 text-center px-4">Show this QR code to receive a payment or pretend to scan to execute a simulated local BOB transfer.</p>
+
+                <div class="space-y-3">
+                    <input type="number" id="qr-amount" placeholder="Amount (Bs.)" class="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                    <button onclick="executeMockQrPay()" class="w-full h-12 bg-blue-600 font-medium rounded-xl active:scale-95 transition text-sm">
+                        Confirm Simulation Pay
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MODAL: GLOBAL WIRE TRANSFER               -->
+        <!-- ========================================== -->
+        <div id="modal-wire" class="hidden absolute inset-0 bg-black/60 backdrop-blur-xl z-20 flex flex-col justify-end transition-transform duration-300">
+            <div class="bg-slate-900/90 border-t border-white/10 rounded-t-[32px] p-6 space-y-4 max-h-[90%] overflow-y-auto">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-semibold">Worldwide Wire Transfer</h3>
+                    <button onclick="closeModal('modal-wire')" class="text-slate-400 hover:text-white">Close</button>
+                </div>
+                
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-[11px] text-slate-400 mb-1 block">Recipient Full Name</label>
+                        <input type="text" id="wire-name" placeholder="e.g. Alice Smith" class="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-400 mb-1 block">Destination Country / Bank Routing</label>
+                        <input type="text" id="wire-routing" placeholder="e.g. United States / Chase Bank" class="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-400 mb-1 block">Account Number / IBAN</label>
+                        <input type="text" id="wire-iban" placeholder="US1234567890" class="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[11px] text-slate-400 mb-1 block">Amount to Send ($ USD)</label>
+                        <input type="number" id="wire-amount" placeholder="0.00" class="w-full h-12 px-4 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 focus:outline-none text-sm">
+                    </div>
+                    <button onclick="executeMockGlobalWire()" class="w-full h-12 bg-green-600 font-medium rounded-xl active:scale-95 transition text-sm mt-2">
+                        Execute Worldwide Wire
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MOCK APPLICATION CONTROLLER LOGIC          -->
+    <!-- ========================================== -->
+    <script>
+        // --- 1. HARDCODED STATE ENGINE & MOCK DATA ---
+        let currentBalanceUSD = 4850.00;
+        let currentBalanceBOB = 12400.00;
+
+        const mockTransactions = [
+            { id: 1, type: 'QR Received', amount: 'Bs. 350.00', date: 'Today, 9:14 AM', category: 'Local Transfer', status: 'Success', polarity: '+' },
+            { id: 2, type: 'Wire Sent', amount: '-$120.00', date: 'Yesterday, 3:45 PM', category: 'Global Outflow', status: 'Success', polarity: '-' },
+            { id: 3, type: 'QR Paid', amount: '-Bs. 45.00', date: 'May 20, 1:12 PM', category: 'Supermercado', status: 'Success', polarity: '-' }
+        ];
+
+        // --- 2. SCREEN ROUTER CONTROLS ---
+        function handleMockLogin() {
+            console.log("DB Action Placeholder: Validating credentials with Firebase Auth...");
+            document.getElementById('screen-login').classList.add('hidden');
+            document.getElementById('screen-dashboard').classList.remove('hidden');
+            renderLedger();
         }
 
-        // ==========================================
-        // COMPONENTS: QR SCAN ENGINE
-        // ==========================================
-        function ScanQR({ setUsdcBalance, setTransactions, changeScreen }) {
-            const [flowState, setFlowState] = React.useState('scanning');
-            const costBob = 165.00;
-            const costUsdc = (costBob / GLOBAL_EXCHANGE_RATE).toFixed(2);
-
-            const executePayment = () => {
-                setFlowState('processing');
-                setTimeout(() => {
-                    setUsdcBalance(prev => prev - parseFloat(costUsdc));
-                    setTransactions(prev => [
-                        { id: Date.now().toString(), title: 'Pago QR: Supermercado', type: 'debit', amount: parseFloat(costUsdc) },
-                        ...prev
-                    ]);
-                    setFlowState('success');
-                }, 1500);
-            };
-
-            return (
-                <div style={{height: '100%', display: 'flex', flexDirection: 'column', animation: 'fadeIn 0.3s ease'}}>
-                    {flowState === 'scanning' && (
-                        <div style={{textAlign: 'center', padding: '20px 0'}}>
-                            <p style={{color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '40px'}}>Encuadre el código QR Simple emitido por el negocio boliviano</p>
-                            <div style={styles.scannerBox}>
-                                <div style={{fontSize: '11px', color: 'var(--text-muted)'}}>Buscando punto de venta...</div>
-                            </div>
-                            <button style={styles.simScanBtn} onClick={() => setFlowState('confirming')}>⚡ Simular Detección de QR Local</button>
-                        </div>
-                    )}
-
-                    {flowState === 'confirming' && (
-                        <div>
-                            <h2 style={{fontSize: '20px', textAlign: 'center', marginBottom: '20px'}}>Liquidación de Compra</h2>
-                            <div style={styles.invoiceSummary}>
-                                <small style={{color: 'var(--text-muted)'}}>ESTABLECIMIENTO</small>
-                                <p style={{fontWeight: '600', marginTop: '2px'}}>Supermercados Fidalga</p>
-                                <div className="divider" />
-                                <div style={{display: 'flex', justifyContent: 'space-between', margin: '8px 0'}}><span style={{color: 'var(--text-secondary)'}}>Monto del Recibo:</span><span style={{fontWeight: '600'}}>{costBob.toFixed(2)} BOB</span></div>
-                                <div style={{display: 'flex', justifyContent: 'space-between', margin: '8px 0'}}><span style={{color: 'var(--text-secondary)'}}>Conversión USDC:</span><span style={{color: 'var(--color-success)', fontWeight: '700'}}>${costUsdc} USDC</span></div>
-                            </div>
-                            <button className="btn-primary" style={{backgroundColor: 'var(--color-success)'}} onClick={executePayment}>Confirmar Transferencia</button>
-                            <button style={{background:'none', border:'none', color:'var(--text-muted)', width:'100%', marginTop:'15px', cursor:'pointer'}} onClick={() => setFlowState('scanning')}>Cancelar</button>
-                        </div>
-                    )}
-
-                    {flowState === 'processing' && (
-                        <div style={{textAlign: 'center', padding: '100px 0'}}>
-                            <div className="spinner" style={styles.loader}></div>
-                            <p style={{fontWeight: '600', marginTop: '20px'}}>Procesando Swap Interbancario...</p>
-                        </div>
-                    )}
-
-                    {flowState === 'success' && (
-                        <div style={{textAlign: 'center', padding: '60px 0'}}>
-                            <div style={{fontSize: '54px', marginBottom: '15px'}}>✅</div>
-                            <h2 style={{fontSize: '22px', fontWeight: '700'}}>¡Compra Procesada!</h2>
-                            <p style={{color: 'var(--text-secondary)', fontSize: '13px', margin: '10px 0 30px', padding: '0 20px'}}>Se han deducido ${costUsdc} USDC y el comercio recibió sus {costBob} BOB instantáneamente.</p>
-                            <button className="btn-primary" onClick={() => changeScreen('inicio')}>Volver a Inicio</button>
-                        </div>
-                    )}
-                </div>
-            );
+        function handleMockLogout() {
+            console.log("DB Action Placeholder: Terminating user session token...");
+            document.getElementById('screen-dashboard').classList.add('hidden');
+            document.getElementById('screen-login').classList.remove('hidden');
         }
 
-        // ==========================================
-        // STYLING MAP FOR COMPONENTS
-        // ==========================================
-        const styles = {
-            actionBtn: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--color-primary)', border: 'none', padding: '12px 0', borderRadius: '12px', width: '22%', cursor: 'pointer', color: '#FFF', fontSize: '14px' },
-            actionText: { fontSize: '10px', marginTop: '6px', fontWeight: '600' },
-            creditCard: { backgroundColor: 'var(--bg-card)', padding: '20px', borderRadius: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '145px', marginBottom: '28px', boxShadow: '0 10px 15px -3px rgba(37, 99, 235, 0.3)' },
-            txRow: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'var(--bg-surface)', padding: '14px 16px', borderRadius: '12px', marginBottom: '10px' },
-            tabWrapper: { display: 'flex', backgroundColor: 'var(--bg-surface)', padding: '4px', borderRadius: '8px', marginBottom: '24px' },
-            tabBtn: { flex: 1, padding: '12px 0', background: 'none', border: 'none', color: 'var(--text-secondary)', fontWeight: '600', fontSize: '13px', borderRadius: '6px', cursor: 'pointer' },
-            activeTabBtn: { backgroundColor: 'var(--color-primary)', color: '#FFF' },
-            inputLabel: { color: 'var(--text-secondary)', fontSize: '14px', marginBottom: '8px' },
-            inputBox: { display: 'flex', alignItems: 'center', backgroundColor: 'var(--bg-surface)', padding: '0 16px', borderRadius: '12px', marginBottom: '8px' },
-            field: { flex: 1, background: 'none', border: 'none', color: '#FFF', fontSize: '24px', fontWeight: '700', padding: '14px 0', outline: 'none' },
-            conversionAlert: { backgroundColor: '#111827', borderLeft: '4px solid var(--color-success)', padding: '14px', borderRadius: '8px', marginBottom: '28px' },
-            qrSquare: { width: '180px', height: '180px', backgroundColor: '#FFF', color: '#000', margin: '20px auto', borderRadius: '12px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', border: '4px solid var(--color-primary)' },
-            bankCardSheet: { backgroundColor: 'var(--bg-surface)', padding: '20px', borderRadius: '16px' },
-            bankItem: { marginBottom: '14px' },
-            bankLabel: { color: 'var(--text-muted)', fontSize: '10px', display: 'block', marginBottom: '2px' },
-            bankValue: { fontSize: '14px' },
-            scannerBox: { width: '220px', height: '220px', border: '3px dashed var(--color-primary)', borderRadius: '24px', margin: '0 auto 30px', display: 'flex', justifyContent: 'center', alignItems: 'center' },
-            simScanBtn: { backgroundColor: 'var(--bg-surface)', border: '1px solid #334155', color: '#3B82F6', padding: '12px 24px', borderRadius: '30px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
-            invoiceSummary: { backgroundColor: 'var(--bg-surface)', padding: '20px', borderRadius: '16px', marginBottom: '28px' },
-            loader: { width: '40px', height: '40px', border: '4px solid var(--bg-surface)', borderTop: '4px solid var(--color-primary)', borderRadius: '50%', animation: 'spin 1s linear infinite', margin: '0 auto' }
-        };
+        // --- 3. MODAL UX HANDLERS ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('hidden');
+        }
 
-        // Standard CSS Animations added injectively
-        const styleSheet = document.styleSheets[0];
-        styleSheet.insertRule(`@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`, styleSheet.cssRules.length);
-        styleSheet.insertRule(`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`, styleSheet.cssRules.length);
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('hidden');
+        }
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        // --- 4. BUSINESS CORE LOGIC SIMULATORS ---
+        function renderLedger() {
+            const ledger = document.getElementById('ledger-container');
+            ledger.innerHTML = '';
+            
+            mockTransactions.forEach(tx => {
+                const colorClass = tx.polarity === '+' ? 'text-green-400' : 'text-white';
+                ledger.innerHTML += `
+                    <div class="flex justify-between items-center p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+                        <div>
+                            <p class="text-sm font-medium">${tx.type}</p>
+                            <p class="text-[11px] text-slate-500">${tx.date} • ${tx.category}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-semibold ${colorClass}">${tx.amount}</p>
+                            <p class="text-[10px] text-slate-400">${tx.status}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function executeMockQrPay() {
+            const amountInput = document.getElementById('qr-amount');
+            const amountValue = parseFloat(amountInput.value);
+
+            if (!amountValue || amountValue <= 0) return alert("Please enter a valid transfer amount.");
+            if (amountValue > currentBalanceBOB) return alert("Insufficient BOB funds.");
+
+            console.log(`DB Action Placeholder: Saving QR Transaction to Firestore collection. Amount: ${amountValue} BOB.`);
+            
+            currentBalanceBOB -= amountValue;
+            document.getElementById('balance-bob').innerText = `Bs. ${currentBalanceBOB.toFixed(2)}`;
+            
+            mockTransactions.unshift({
+                id: Date.now(),
+                type: 'QR Paid',
+                amount: `-Bs. ${amountValue.toFixed(2)}`,
+                date: 'Just Now',
+                category: 'Simulated Local QR',
+                status: 'Success',
+                polarity: '-'
+            });
+
+            amountInput.value = '';
+            closeModal('modal-qr');
+            renderLedger();
+        }
+
+        function executeMockGlobalWire() {
+            const name = document.getElementById('wire-name').value;
+            const routing = document.getElementById('wire-routing').value;
+            const iban = document.getElementById('wire-iban').value;
+            const amountInput = document.getElementById('wire-amount');
+            const amountValue = parseFloat(amountInput.value);
+
+            if (!name || !routing || !iban || !amountValue || amountValue <= 0) {
+                return alert("Please fill completely all wire destination fields.");
+            }
+            if (amountValue > currentBalanceUSD) return alert("Insufficient USD funds.");
+
+            console.log(`DB Action Placeholder: Pushing Worldwide Document to Firestore Ledger. Target: ${name}, IBAN: ${iban}, Amount: $${amountValue} USD.`);
+
+            currentBalanceUSD -= amountValue;
+            document.getElementById('balance-usd').innerText = `$${currentBalanceUSD.toFixed(2)}`;
+
+            mockTransactions.unshift({
+                id: Date.now(),
+                type: 'Wire Sent',
+                amount: `-$${amountValue.toFixed(2)}`,
+                date: 'Just Now',
+                category: `To ${name}`,
+                status: 'Processing',
+                polarity: '-'
+            });
+
+            amountInput.value = '';
+            closeModal('modal-wire');
+            renderLedger();
+        }
     </script>
 </body>
 </html>
