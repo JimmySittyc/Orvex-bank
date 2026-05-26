@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orvex Bank - Black & Gold Premium iOS 26</title>
-    <!-- Tailwind CSS via CDN -->
+    <title>Orvex Bank - Premium iOS 26</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -12,25 +11,28 @@
                 extend: {
                     fontFamily: {
                         sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        tealBrand: '#124559',
+                        charcoalBrand: '#393D3F',
                     }
                 }
             }
         }
     </script>
-    <!-- Custom CSS for Gold Metallic Accents and Glassmorphism -->
     <style>
         .ios-blur {
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
-            background: rgba(251, 191, 36, 0.02);
-            border: 1px solid rgba(251, 191, 36, 0.1);
+            background: rgba(18, 69, 89, 0.03);
+            border: 1px solid rgba(18, 69, 89, 0.2);
         }
-        .gold-gradient {
-            background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #b45309 100%);
+        .teal-gradient {
+            background: linear-gradient(135deg, #226f8e 0%, #124559 60%, #0a2733 100%);
         }
-        .gold-border-glow {
-            border: 1px solid rgba(251, 191, 36, 0.25);
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.03);
+        .teal-border-glow {
+            border: 1px solid rgba(18, 69, 89, 0.35);
+            box-shadow: 0 0 15px rgba(18, 69, 89, 0.05);
         }
         /* Hide scrollbars but retain functionality */
         ::-webkit-scrollbar { display: none; }
@@ -39,46 +41,37 @@
 </head>
 <body class="h-full bg-neutral-950 font-sans antialiased flex justify-center items-center p-0 sm:p-4">
 
-    <!-- Container mimicking a sleek dynamic mobile viewport -->
     <div id="app-container" class="w-full h-full sm:max-w-md sm:h-[850px] sm:rounded-[50px] sm:border-[8px] sm:border-neutral-900 shadow-2xl relative overflow-hidden flex flex-col bg-neutral-950">
         
-        <!-- ========================================== -->
-        <!-- SCREEN 1: LOGIN (Visible by default)      -->
-        <!-- ========================================== -->
         <div id="screen-login" class="flex-1 flex flex-col justify-between p-8 z-10 bg-neutral-950">
             <div class="text-center pt-16">
-                <!-- Gold Metallic Logo Box -->
-                <div class="w-16 h-16 gold-gradient rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-amber-500/20 mb-4">
-                    <span class="text-2xl font-bold tracking-tighter text-black">O</span>
+                <div class="w-16 h-16 teal-gradient rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-[#124559]/30 mb-4">
+                    <span class="text-2xl font-bold tracking-tighter text-white">O</span>
                 </div>
-                <h1 class="text-3xl font-light tracking-tight text-neutral-200">Orvex <span class="font-medium text-amber-400">Bank</span></h1>
-                <p class="text-amber-500/70 text-[10px] uppercase tracking-[0.2em] font-medium mt-2">Sovereign Global Capital</p>
+                <h1 class="text-3xl font-light tracking-tight text-neutral-200">Orvex <span class="font-medium text-[#124559]">Bank</span></h1>
+                <p class="text-[#393D3F] text-[10px] uppercase tracking-[0.2em] font-semibold mt-2">Sovereign Global Capital</p>
             </div>
 
             <div class="space-y-4">
                 <div class="space-y-2">
-                    <input type="email" id="login-email" placeholder="Private Key / Email" value="user@orvex.com" class="w-full h-14 px-5 rounded-2xl bg-neutral-900/60 border border-neutral-800 focus:border-amber-500/50 focus:outline-none transition text-base text-white placeholder-neutral-600">
-                    <input type="password" id="login-password" placeholder="Passphrase" value="password123" class="w-full h-14 px-5 rounded-2xl bg-neutral-900/60 border border-neutral-800 focus:border-amber-500/50 focus:outline-none transition text-base text-white placeholder-neutral-600">
+                    <input type="email" id="login-email" placeholder="Private Key / Email" value="user@orvex.com" class="w-full h-14 px-5 rounded-2xl bg-neutral-900/60 border border-neutral-800 focus:border-[#124559]/60 focus:outline-none transition text-base text-white placeholder-neutral-600">
+                    <input type="password" id="login-password" placeholder="Passphrase" value="password123" class="w-full h-14 px-5 rounded-2xl bg-neutral-900/60 border border-neutral-800 focus:border-[#124559]/60 focus:outline-none transition text-base text-white placeholder-neutral-600">
                 </div>
-                <button onclick="handleMockLogin()" class="w-full h-14 gold-gradient text-neutral-950 font-semibold rounded-2xl active:scale-[0.98] transition flex items-center justify-center text-base shadow-lg shadow-amber-500/10">
+                <button onclick="handleMockLogin()" class="w-full h-14 teal-gradient text-white font-semibold rounded-2xl active:scale-[0.98] transition flex items-center justify-center text-base shadow-lg shadow-[#124559]/20">
                     Access Vault
                 </button>
             </div>
 
             <div class="text-center text-[10px] text-neutral-600 tracking-widest uppercase pb-4">
-                Secured via Orvex Gold Standard API
+                Secured via Orvex Premium Rail API
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- SCREEN 2: MAIN DASHBOARD (Hidden by default)-->
-        <!-- ========================================== -->
-        <div id="screen-dashboard" class="hidden flex-1 flex flex-col justify-between overflow-hidden z-10 z-10 bg-neutral-950">
+        <div id="screen-dashboard" class="hidden flex-1 flex flex-col justify-between overflow-hidden z-10 bg-neutral-950">
             
-            <!-- Top Nav -->
             <div class="p-6 flex justify-between items-center bg-neutral-950 border-b border-neutral-900">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-neutral-900 border border-amber-500/30 flex items-center justify-center font-medium text-sm text-amber-400">
+                    <div class="w-10 h-10 rounded-full bg-neutral-900 border border-[#124559]/40 flex items-center justify-center font-medium text-sm text-[#124559]">
                         JD
                     </div>
                     <div>
@@ -86,128 +79,115 @@
                         <p class="text-sm font-medium text-neutral-200">John Doe</p>
                     </div>
                 </div>
-                <button onclick="handleMockLogout()" class="px-3 py-1.5 rounded-full text-xs font-medium bg-neutral-900 text-neutral-400 hover:text-amber-400 border border-neutral-800 focus:outline-none transition">
+                <button onclick="handleMockLogout()" class="px-3 py-1.5 rounded-full text-xs font-medium bg-neutral-900 text-neutral-400 hover:text-[#124559] border border-neutral-800 focus:outline-none transition">
                     Exit
                 </button>
             </div>
 
-            <!-- Dynamic Balance Content -->
             <div class="flex-1 overflow-y-auto px-6 py-4 space-y-6">
                 
-                <!-- Balances Section -->
                 <div class="space-y-3">
                     <div class="flex justify-between items-center">
                         <span class="text-[10px] font-bold tracking-widest text-neutral-500 uppercase">Liquidity Assets</span>
-                        <span class="text-[10px] text-amber-400/80 flex items-center gap-1 font-mono">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block animate-pulse"></span> Settlement Live
+                        <span class="text-[10px] text-[#124559] flex items-center gap-1 font-mono font-semibold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#124559] inline-block animate-pulse"></span> Settlement Live
                         </span>
                     </div>
 
-                    <!-- Card USDT -->
-                    <div class="ios-blur rounded-[28px] p-6 relative overflow-hidden shadow-xl gold-border-glow">
+                    <div class="ios-blur rounded-[28px] p-6 relative overflow-hidden shadow-xl teal-border-glow">
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-xs text-neutral-400 font-medium">Tether Stablecoin Balance</p>
-                                <p id="balance-usdt" class="text-3xl font-bold tracking-tight mt-1 text-white">4,850.00 <span class="text-xl font-medium text-amber-400">USDT</span></p>
+                                <p id="balance-usdt" class="text-3xl font-bold tracking-tight mt-1 text-white">4,850.00 <span class="text-xl font-medium text-[#124559]">USDT</span></p>
                             </div>
-                            <span class="text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-md bg-amber-400 text-black uppercase">USDT</span>
+                            <span class="text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-md bg-[#124559] text-white uppercase">USDT</span>
                         </div>
-                        <p class="text-[9px] text-amber-500/40 mt-6 tracking-widest font-mono">ORVX-8821-USDT // TRC20-ERC20</p>
+                        <p class="text-[9px] text-[#393D3F] mt-6 tracking-widest font-mono font-semibold">ORVX-8821-USDT // TRC20-ERC20</p>
                     </div>
 
-                    <!-- Card BOB -->
                     <div class="ios-blur rounded-[28px] p-6 relative overflow-hidden shadow-xl border border-neutral-900">
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-xs text-neutral-400 font-medium">Bolivianos Balance</p>
                                 <p id="balance-bob" class="text-3xl font-bold tracking-tight mt-1 text-neutral-200">Bs. 12,400.00</p>
                             </div>
-                            <span class="text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-md bg-neutral-900 text-amber-400/80 border border-amber-500/20 uppercase">BOB</span>
+                            <span class="text-[10px] font-bold tracking-widest px-2.5 py-1 rounded-md bg-neutral-900 text-[#124559] border border-[#124559]/30 uppercase">BOB</span>
                         </div>
                         <p class="text-[9px] text-neutral-600 mt-6 tracking-widest font-mono">ORVX-4119-BOB // CORESYNC</p>
                     </div>
                 </div>
 
-                <!-- Action Hub Quick Controls -->
                 <div class="grid grid-cols-2 gap-3">
                     <button onclick="openModal('modal-qr')" class="ios-blur rounded-2xl py-4 flex flex-col items-center justify-center gap-2 hover:bg-neutral-900/60 active:scale-95 border border-neutral-900 transition group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-amber-400/80 group-hover:text-amber-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-[#124559] group-hover:text-[#226f8e]">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
                         </svg>
                         <span class="text-xs font-medium text-neutral-300">Bolivia QR Pay</span>
                     </button>
                     <button onclick="openModal('modal-wire')" class="ios-blur rounded-2xl py-4 flex flex-col items-center justify-center gap-2 hover:bg-neutral-900/60 active:scale-95 border border-neutral-900 transition group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-amber-400/80 group-hover:text-amber-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-[#124559] group-hover:text-[#226f8e]">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3" />
                         </svg>
                         <span class="text-xs font-medium text-neutral-300">Global Wire</span>
                     </button>
                 </div>
 
-                <!-- Transaction Ledger Feed -->
                 <div class="space-y-3">
                     <span class="text-[10px] font-bold tracking-widest text-neutral-500 uppercase block">Ledger Architecture</span>
                     <div id="ledger-container" class="space-y-2">
-                        <!-- Mock data injected here -->
-                    </div>
+                        </div>
                 </div>
 
             </div>
 
         </div>
 
-        <!-- ========================================== -->
-        <!-- MODAL: BOLIVIAN QR PAYING                 -->
-        <!-- ========================================== -->
         <div id="modal-qr" class="hidden absolute inset-0 bg-black/85 backdrop-blur-md z-20 flex flex-col justify-end">
             <div class="bg-neutral-900 border-t border-neutral-800 rounded-t-[32px] p-6 space-y-6 max-h-[90%] overflow-y-auto">
                 <div class="flex justify-between items-center">
                     <h3 class="text-base font-medium text-neutral-200">Orvex Link (Simple QR)</h3>
-                    <button onclick="closeModal('modal-qr')" class="text-neutral-500 hover:text-amber-400 text-sm">Dismiss</button>
+                    <button onclick="closeModal('modal-qr')" class="text-neutral-500 hover:text-[#124559] text-sm">Dismiss</button>
                 </div>
                 
                 <div class="w-44 h-44 bg-white p-3 rounded-2xl mx-auto flex items-center justify-center filter invert brightness-95">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=orvex-gold-metallic-rail" alt="QR" class="w-full h-full">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=orvex-premium-teal-rail" alt="QR" class="w-full h-full">
                 </div>
                 <p class="text-[11px] text-neutral-500 text-center px-4">Ready for automated local BOB settlement simulation vectors.</p>
 
                 <div class="space-y-3">
-                    <input type="number" id="qr-amount" placeholder="Amount (Bs.)" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
-                    <button onclick="executeMockQrPay()" class="w-full h-12 gold-gradient text-black font-semibold rounded-xl active:scale-95 transition text-sm">
+                    <input type="number" id="qr-amount" placeholder="Amount (Bs.)" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-[#124559]/40 focus:outline-none text-sm text-white">
+                    <button onclick="executeMockQrPay()" class="w-full h-12 teal-gradient text-white font-semibold rounded-xl active:scale-95 transition text-sm">
                         Execute Settlement
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- MODAL: GLOBAL WIRE TRANSFER               -->
-        <!-- ========================================== -->
         <div id="modal-wire" class="hidden absolute inset-0 bg-black/85 backdrop-blur-md z-20 flex flex-col justify-end">
             <div class="bg-neutral-900 border-t border-neutral-800 rounded-t-[32px] p-6 space-y-4 max-h-[90%] overflow-y-auto">
                 <div class="flex justify-between items-center">
                     <h3 class="text-base font-medium text-neutral-200">Global Wire Protocol</h3>
-                    <button onclick="closeModal('modal-wire')" class="text-neutral-500 hover:text-amber-400 text-sm">Dismiss</button>
+                    <button onclick="closeModal('modal-wire')" class="text-neutral-500 hover:text-[#124559] text-sm">Dismiss</button>
                 </div>
                 
                 <div class="space-y-3">
                     <div>
                         <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">Beneficiary Account Name</label>
-                        <input type="text" id="wire-name" placeholder="e.g. Alice Smith" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
+                        <input type="text" id="wire-name" placeholder="e.g. Alice Smith" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-[#124559]/40 focus:outline-none text-sm text-white">
                     </div>
                     <div>
                         <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">Clearing Hub / Routing</label>
-                        <input type="text" id="wire-routing" placeholder="e.g. Chase Bank, USA" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
+                        <input type="text" id="wire-routing" placeholder="e.g. Chase Bank, USA" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-[#124559]/40 focus:outline-none text-sm text-white">
                     </div>
                     <div>
                         <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">USDT Network Address / IBAN</label>
-                        <input type="text" id="wire-iban" placeholder="0x71C... or International Wire Account" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
+                        <input type="text" id="wire-iban" placeholder="0x71C... or International Wire Account" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-[#124559]/40 focus:outline-none text-sm text-white">
                     </div>
                     <div>
                         <label class="text-[10px] uppercase tracking-wider text-neutral-500 mb-1 block">Volume Allocation (USDT)</label>
-                        <input type="number" id="wire-amount" placeholder="0.00" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-amber-500/40 focus:outline-none text-sm text-white">
+                        <input type="number" id="wire-amount" placeholder="0.00" class="w-full h-12 px-4 rounded-xl bg-neutral-950 border border-neutral-800 focus:border-[#124559]/40 focus:outline-none text-sm text-white">
                     </div>
-                    <button onclick="executeMockGlobalWire()" class="w-full h-12 gold-gradient text-black font-semibold rounded-xl active:scale-95 transition text-sm mt-2">
+                    <button onclick="executeMockGlobalWire()" class="w-full h-12 teal-gradient text-white font-semibold rounded-xl active:scale-95 transition text-sm mt-2">
                         Transmit Capital
                     </button>
                 </div>
@@ -216,9 +196,6 @@
 
     </div>
 
-    <!-- ========================================== -->
-    <!-- APPLICATION CONTROLLER LOGIC               -->
-    <!-- ========================================== -->
     <script>
         let currentBalanceUSDT = 4850.00;
         let currentBalanceBOB = 12400.00;
@@ -256,7 +233,7 @@
             
             mockTransactions.forEach(tx => {
                 const isPositive = tx.polarity === '+';
-                const amountColor = isPositive ? 'text-amber-400' : 'text-neutral-300';
+                const amountColor = isPositive ? 'text-[#124559] font-bold' : 'text-neutral-300';
                 ledger.innerHTML += `
                     <div class="flex justify-between items-center p-4 rounded-2xl bg-neutral-900/40 border border-neutral-900">
                         <div>
@@ -264,7 +241,7 @@
                             <p class="text-[11px] text-neutral-500">${tx.date} • ${tx.category}</p>
                         </div>
                         <div class="text-right">
-                            <p class="text-sm font-semibold ${amountColor}">${tx.amount}</p>
+                            <p class="text-sm ${amountColor}">${tx.amount}</p>
                             <p class="text-[10px] text-neutral-600 tracking-wider uppercase font-mono">${tx.status}</p>
                         </div>
                     </div>
@@ -314,7 +291,7 @@
             console.log(`Orvex Ledger Event: Distributing cross-border USDT wire framework. Recipient: ${name}. Volume: ${amountValue} USDT.`);
 
             currentBalanceUSDT -= amountValue;
-            document.getElementById('balance-usdt').innerHTML = `${currentBalanceUSDT.toFixed(2)} <span class="text-xl font-medium text-amber-400">USDT</span>`;
+            document.getElementById('balance-usdt').innerHTML = `${currentBalanceUSDT.toFixed(2)} <span class="text-xl font-medium text-[#124559]">USDT</span>`;
 
             mockTransactions.unshift({
                 id: Date.now(),
